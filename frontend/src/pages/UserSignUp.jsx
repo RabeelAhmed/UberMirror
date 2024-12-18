@@ -16,7 +16,7 @@ export const UserSignUp = () => {
     console.log('Form submitted', { firstName, lastName, email, password });
 
     setUserData({
-      username: {
+      fullName: {
         firstName: firstName,
         lastName: lastName
       },

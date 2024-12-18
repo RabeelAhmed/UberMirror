@@ -16,7 +16,7 @@ export const CaptainSignUp = () => {
       console.log('Form submitted', { firstName, lastName, email, password });
   
       setcaptainData({
-        captainname: {
+        fullName: {
           firstName: firstName,
           lastName: lastName
         },
@@ -38,7 +38,7 @@ export const CaptainSignUp = () => {
         alt=""
       />
       <form onSubmit={submitHandler}>
-        <h3 className="text-lg font-medium mb-2">What's your name?</h3>
+        <h3 className="text-lg font-medium mb-2">What's our Captain's name?</h3>
         <div className='flex gap-4 mb-6'>
           <input
             required
@@ -58,7 +58,7 @@ export const CaptainSignUp = () => {
           />
         </div>
 
-        <h3 className="text-lg font-medium mb-2">What's your email?</h3>
+        <h3 className="text-lg font-medium mb-2">What's our captain's email?</h3>
         <input
           required
           className="bg-[#eeeeee] mb-6 rounded px-4 py-2 border w-full text-lg placeholder:text-sm"
@@ -94,11 +94,11 @@ export const CaptainSignUp = () => {
     <p className="mb-2">
       This site is protected by reCAPTCHA and the Google 
       <a href="https://policies.google.com/privacy" className="text-blue-500 hover:text-blue-700 underline">
-        Privacy Policy
+         Privacy Policy 
       </a> 
       and 
       <a href="https://policies.google.com/terms" className="text-blue-500 hover:text-blue-700 underline">
-        Terms of Service
+         Terms of Service 
       </a> 
       apply.
     </p>
