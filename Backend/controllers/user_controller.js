@@ -5,33 +5,37 @@ const BlackListTokenModel  = require('../models/blackListtoken_model')
 
 module.exports.registerUser = async (req, res, next) => {
 
-    const errors = validationResult(req)
-
-    if(!errors.isEmpty()){
-        return res.status(400).json({errors: errors.array() })
+    // Check for validation errors
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
     }
 
-    const {fullname, email, password} = req.body;
+    const { fullname, email, password } = req.body;
 
-    const isUserAlreadyExist = await userModel.findOne({email})
-
-    if(isUserAlreadyExist) {
-        return res.status(400).json({message: 'User already exist!'})
+    // Check if user already exists
+    const isUserAlreadyExist = await userModel.findOne({ email });
+    if (isUserAlreadyExist) {
+        return res.status(400).json({ message: 'User already exists!' });
     }
 
-    const hashedPassword = await userModel.hashPassword(password)
+    // Hash the password
+    const hashedPassword = await userModel.hashPassword(password);
 
+    // Create new user
     const user = await userService.createUser({
         firstname: fullname.firstname,
         lastname: fullname.lastname,
         email,
         password: hashedPassword 
-    })
+    });
 
-    const token = user.generateAuthToken()
+    // Generate token (assuming the user object has this method)
+    const token = user.generateAuthToken();
 
-    res.status(201).json({token, user})
-}
+    // Return success response
+    res.status(201).json({ token, user });
+};
 
 module.exports.loginUser = async (req, res, next) => {
     const errors = validationResult(req)
