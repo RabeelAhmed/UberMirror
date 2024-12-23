@@ -34,6 +34,7 @@ export const UserSignUp = () => {
       if (response.status === 201) {
         const data = response.data;
         setUser(data.user); // Save user data in context
+        localStorage.setItem('token', data.token); // Save token in local storage
         navigate('/home'); // Navigate to home page on success
       }
 
