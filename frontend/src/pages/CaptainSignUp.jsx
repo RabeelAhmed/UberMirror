@@ -47,7 +47,6 @@ export const CaptainSignUp = () => {
         navigate('/captain-home');
       }
     } catch (error) {
-      console.error("Error during registration:", error.response ? error.response.data : error.message);
       
       if (error.response) {
         // Log server-side validation errors

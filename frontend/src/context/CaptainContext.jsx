@@ -1,22 +1,22 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useState } from 'react';
 
 // Create the context
 export const CaptainDataContext = createContext();
 
 const CaptainContext = ({ children }) => {
-  const [captainData, setCaptainData] = useState(null);
-  const [isloading, setIsLoading] = useState(false);
+  const [captain, setCaptain] = useState(null);  // Changed to captain and setCaptain for consistency
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const updateCaptain = async (captainData) => {
-    setCaptainData(captainData);
+  const updateCaptain = (captainData) => {
+    setCaptain(captainData);
   };
 
   const value = {
-    captainData,
-    setCaptainData,
+    captain,
+    setCaptain,
     updateCaptain,
-    isloading,
+    isLoading,
     setIsLoading,
     error,
     setError
