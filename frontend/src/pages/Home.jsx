@@ -8,8 +8,10 @@ export const Home = () => {
   const [pickUp, setPickUp] = useState('')
   const [destination, setDestination] = useState('')
   const [panelOpen, setPanelOpen] = useState(false)
+  const vehiclePanleRef = useRef(null)
   const panelRef = useRef(null)
   const panelCloseRef = useRef(null)
+  const [vehcilePanel, setVehiclePanel] = useState(false)
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -39,6 +41,22 @@ export const Home = () => {
         })
       }
   }, [panelOpen])
+
+  useGSAP(function(){
+    if(vehcilePanel){
+    gsap.to(vehiclePanleRef.current, {
+      transform: 'translateY(0)',
+      duration: 0.5
+    })
+  }else{
+    gsap.to(vehiclePanleRef.current, {
+      transform: 'translateY(100%)',
+      duration: 0.5
+    })
+  }
+  }, [vehcilePanel])
+    
+    
 
 
 
@@ -82,11 +100,14 @@ export const Home = () => {
           </div>
 
           <div ref={panelRef} className=' bg-white h-0'>
-            <LocationPanel />
+            <LocationPanel setPanelOpen={setPanelOpen} setVehiclePanel={setVehiclePanel} />
           </div>
         </div>
 
-        <div className='fixed w-full z-10 bottom-0 px-3 py-6 bg-white'>
+        <div ref={vehiclePanleRef} className='fixed w-full z-10 bottom-0 translate-y-full px-3 py-10 pt-14 bg-white'>
+        <h5 className='p-1 text-center w-[93%] absolute top-0' onClick={()=>{
+          setVehiclePanel(false)
+        }}><i className="ri-arrow-down-wide-line text-3xl text-gray-800"></i></h5>
           <h3 className='text-2xl font-semibold mb-5'>Choose a Vehicle</h3>
           <div className='flex border-2 active:border-black mb-2 rounded-xl w-full p-3 items-center justify-between'>
             <img className='h-16' src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_552,w_552/v1555367538/assets/31/ad21b7-595c-42e8-ac53-53966b4a5fee/original/Final_Black.png" alt="" />
