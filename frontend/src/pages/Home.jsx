@@ -6,6 +6,7 @@ import { LocationPanel } from '../components/LocationPanel'
 import VehiclePanel from '../components/VehiclePanel'
 import ConfirmRide from '../components/ConfirmRide'
 import LookingForDriver from '../components/LookingforDriver'
+import WaitingForDriver from '../components/WaitingForDriver'
 
 export const Home = () => {
   const [pickUp, setPickUp] = useState('')
@@ -16,9 +17,13 @@ export const Home = () => {
   const vehiclefoundRef = useRef(null)
   const panelRef = useRef(null)
   const panelCloseRef = useRef(null)
+  const watingForDriverRef = useRef(null)
+
+
   const [vehcilePanel, setVehiclePanel] = useState(false)
   const [confirmRidePanel, setConfirmRidePanel] = useState(false)
   const [vehiclefound, setVehiclefound] = useState(false)
+  const [waitingForDriver, setWaitingForDriver] = useState(false)
   
 
   const submitHandler = (e) => {
@@ -90,6 +95,20 @@ export const Home = () => {
       })
     }
   }, [vehiclefound])
+
+  useGSAP(function () {
+    if (waitingForDriver) {
+      gsap.to(watingForDriverRef.current, {
+        transform: 'translateY(0)',
+        duration: 0.5,
+      })
+    } else {
+      gsap.to(vehiclefoundRef.current, {
+        transform: 'translateY(100%)',
+        duration: 0.5,
+      })
+    }
+  }, [waitingForDriver])
 
   return (
     <div className="h-screen relative overflow-hidden">
@@ -174,7 +193,14 @@ export const Home = () => {
         ref={vehiclefoundRef}
         className="fixed w-full z-10 bottom-0 translate-y-full px-3 py-8 pt-14 bg-white"
       >
-       <LookingForDriver setConfirmRidePanel={setConfirmRidePanel}  />
+       <LookingForDriver setVehiclefound={setVehiclefound}  />
+      </div>
+
+      <div
+      ref={watingForDriverRef}
+        className="fixed w-full z-10 bottom-0 translate-y-full px-3 py-8 pt-14 bg-white"
+      >
+       <WaitingForDriver waitingForDriver={waitingForDriver} />
       </div>
     </div>
   )
