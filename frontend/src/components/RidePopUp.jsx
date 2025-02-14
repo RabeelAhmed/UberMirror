@@ -45,17 +45,20 @@ export default function RidePopUp(props) {
             </div>
           </div>
         </div>
-        <button onClick={()=>{
-        props.setConfirmRidePopUpPanel(true)
-        }} className="w-full bg-green-600 text-white font-semibold p-2 rounded-lg">
-          Accept
-        </button>
+        <div className='w-full flex items-center justify-between mt-4'>
 
         <button onClick={()=>{
             props.setRidePopUpPanel(false)
-        }} className="w-full bg-gray-400 text-gray-800 font-semibold p-2 rounded-lg">
+        }} className="bg-gray-400 text-gray-800 font-semibold p-3 px-10 rounded-lg">
           Ignore
         </button>
+
+        <button onClick={()=>{
+        props.setConfirmRidePopUpPanel(true)
+        }} className="bg-green-600 text-white font-semibold p-3 px-10 rounded-lg">
+          Accept
+        </button>
+        </div>
       </div>
     </div>
   )
